@@ -5,7 +5,6 @@ import sqlite3
 root = Tk()
 root.geometry("400x450")
 root.title("Cyber Worm")
-root.iconbitmap("C:/Python/EMS/logo.ico")
 root.configure(bg="#005b96")
 
 connection = sqlite3.connect("admins.db")
@@ -13,18 +12,15 @@ myCursor = connection.cursor()
 
 ############################################## LOGIN ##############################################
 def loginButton():
-    myCursor.execute("SELECT username FROM administrators")
-    results = myCursor.fetchall()
-    for result in results:
-        for selected in result:
-            if usernameEntry.get() in selected:
-                myCursor.execute(f"SELECT password FROM administrators WHERE username='{selected}'")
-                passwd = myCursor.fetchall()
-                if passwordEntry.get() == passwd[0][0]:
-                    messagebox.showinfo("System Message", "Successfully logged in.")
-                    exec(open("employee.py").read())
-                else:
-                    return messagebox.showinfo("System Message", "Username or password is wrong.")
+    myCursor.execute("SELECT password FROM administrators WHERE username = ?", (usernameEntry.get(),))
+    row = myCursor.fetchone()
+    if row is None or passwordEntry.get() != row[0]:
+        return messagebox.showinfo("System Message", "Username or password is wrong.")
+    messagebox.showinfo("System Message", "Successfully logged in.")
+    import runpy
+    from pathlib import Path
+    runpy.run_path(str(Path(__file__).with_name('employee.py')), run_name='__main__')
+
 
 welcomeLabel = Label(root, text="Welcome.", font=('Arial', 20, 'bold'), bg='#005b96', fg='red', pady=100).pack()
 

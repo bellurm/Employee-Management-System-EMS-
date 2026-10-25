@@ -6,7 +6,6 @@ import webbrowser as web
 system = Tk()
 system.geometry("1920x1080")
 system.title("Cyber Worm")
-system.iconbitmap("C:/Python/EMS/logo.ico")
 system.configure(bg="#005b96")
 #system.attributes('-fullscreen', True)
 
@@ -146,7 +145,6 @@ def showTables():
     windowInfo = Toplevel()
     windowInfo.geometry("1920x1080")
     windowInfo.title(f"Table's ({getDbNameEntry_Table.get()}) rows.")
-    windowInfo.iconbitmap("C:/Python/EMS/logo.ico")
     windowInfo.configure(bg="#005b96")
 
     databaseName = getDbNameEntry_Table.get()
@@ -169,7 +167,6 @@ def showRows():
     windowInfo = Toplevel()
     windowInfo.geometry("1920x1080")
     windowInfo.title(f"Table's ({getTableNameEntry_Row.get()}) rows.")
-    windowInfo.iconbitmap("C:/Python/EMS/logo.ico")
     windowInfo.configure(bg="#005b96")
 
     databaseName = getDbNameEntry_Table.get()
